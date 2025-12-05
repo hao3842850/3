@@ -201,8 +201,8 @@ def handle_message(event):
 # --------------------------------------------------------
 # help 說明
 # --------------------------------------------------------
-if msg in ["help", "指令", "幫助"]:
-    help_text = (
+    if msg in ["help", "指令", "幫助"]:
+        help_text = (
         "【天堂M 吃王小幫手 指令說明】\n\n"
         "📌 登記王\n"
         "  6666 王名\n"
@@ -219,11 +219,11 @@ if msg in ["help", "指令", "幫助"]:
         "  clear → 再輸入：是\n"
     )
 
-    line_bot_api.reply_message(
+        line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(help_text)
+            TextSendMessage(help_text)
     )
-    return
+        return
 
 
     if msg == "出":
