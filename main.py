@@ -244,6 +244,7 @@ def handle_message(event):
             return
 
         lines = [f"【{boss} 最近登記紀錄】", ""]
+
         for rec in db[boss][-5:]:
             nickname = get_username(rec["user"])
             lines.append(f"{rec['date']} by {nickname}")
