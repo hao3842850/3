@@ -21,6 +21,14 @@ import json
 from datetime import datetime, timedelta
 import pytz
 
+def get_username(user_id):
+    try:
+        profile = line_bot_api.get_profile(user_id)
+        return profile.display_name
+    except:
+        return user_id  # fallback
+
+
 app = FastAPI()
 
 CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
@@ -237,7 +245,8 @@ def handle_message(event):
 
         lines = [f"【{boss} 最近登記紀錄】", ""]
         for rec in db[boss][-5:]:
-            lines.append(f"{rec['date']} by {rec['user']}")
+            nickname = get_username(rec["user"])
+            lines.append(f"{rec['date']} by {nickname}")
             lines.append(f"死亡 {rec['kill']}")
             lines.append(f"重生 {rec['respawn'].split('T')[1]}")
             if rec["note"]:
